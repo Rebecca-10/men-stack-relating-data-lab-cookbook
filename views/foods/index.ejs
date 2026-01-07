@@ -1,0 +1,21 @@
+<%- include('../partials/_navbar.ejs') %>
+
+<h1>My Pantry</h1>
+
+<a href="/users/<%= user._id %>/foods/new">Add New Item</a>
+
+<ul>
+  <% if (user.pantry && user.pantry.length > 0) { %>
+    <% user.pantry.forEach((item) => { %>
+      <li>
+        <%= item.name %>
+        <a href="/users/<%= user._id %>/foods/<%= item._id %>/edit">Edit</a>
+        <form action="/users/<%= user._id %>/foods/<%= item._id %>?_method=DELETE" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  <% } else { %>
+    <p>There are no items in your pantry yet!</p>
+  <% } %>
+</ul>
